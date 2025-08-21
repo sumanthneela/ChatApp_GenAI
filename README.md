@@ -223,14 +223,6 @@ DATABASE_URL=postgresql://user:pass@host:port/db
 VITE_API_URL=https://your-api-domain.com
 ```
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
 ### Logs
 
 - Backend logs: Check Docker container logs or terminal output
