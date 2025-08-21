@@ -100,6 +100,7 @@ class ConnectionManager:
     async def send_chat_message(self, sender_id: str, receiver_id: str, content: str):
         message_id = str(uuid.uuid4())
         timestamp = datetime.now()
+        sender_name = connected_users[sender_id].name # Get sender's name
         
         message_data = {
             "type": "chat_message",
@@ -108,7 +109,8 @@ class ConnectionManager:
                 "sender_id": sender_id,
                 "receiver_id": receiver_id,
                 "content": content,
-                "timestamp": timestamp.isoformat()
+                "timestamp": timestamp.isoformat(),
+                "sender_name": sender_name # Include sender's name
             }
         }
         
@@ -198,4 +200,5 @@ async def websocket_endpoint(websocket: WebSocket, user_name: str):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
 

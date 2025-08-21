@@ -20,7 +20,7 @@ function App() {
   
   const wsRef = useRef(null)
   const messagesEndRef = useRef(null)
-
+const currentUserIdRef = useRef('');
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
@@ -47,9 +47,18 @@ function App() {
       switch (data.type) {
         case 'connection_established':
           setCurrentUserId(data.user_id)
+          currentUserIdRef.current = data.user_id;
+          // Update users list to include self with correct ID
+          setUsers(prevUsers => {
+            const updatedUsers = prevUsers.map(user => 
+              user.id === data.user_id ? { ...user, id: data.user_id } : user
+            )
+            return updatedUsers.filter(user => user.id !== data.user_id)
+          })
           break
           
         case 'user_list_update':
+          // Ensure current user is not in the list of other users
           setUsers(data.users.filter(user => user.id !== currentUserId))
           break
           
@@ -61,7 +70,8 @@ function App() {
             receiverId: message.receiver_id,
             content: message.content,
             timestamp: new Date(message.timestamp),
-            isOwn: message.sender_id === currentUserId
+            isOwn: message.sender_id === currentUserIdRef.current,
+            senderName: message.sender_name
           }])
           break
           
@@ -80,6 +90,7 @@ function App() {
       setUsers([])
       setSelectedUser(null)
       setMessages([])
+      setCurrentUserId('')
     }
 
     ws.onerror = (error) => {
@@ -229,7 +240,7 @@ function App() {
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2">
               <MessageCircle className="h-5 w-5" />
-              {selectedUser ? `Chat with ${selectedUser.name}` : 'Select a user to start chatting'}
+              {selectedUser ? `${selectedUser.name}` : 'Select a user to start chatting'}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0 flex flex-col h-[calc(100vh-8rem)]">
@@ -246,20 +257,22 @@ function App() {
                       messages.map((message) => (
                         <div
                           key={message.id}
-                          className={`flex ${message.isOwn ? 'justify-end' : 'justify-start'}`}
+                          className={`flex ${message.isOwn ? 'justify-end' : 'justify-start'} animate-fade-in`}
                         >
                           <div
                             className={`max-w-[70%] p-3 rounded-lg ${
                               message.isOwn
-                                ? 'bg-primary text-primary-foreground'
-                                : 'bg-muted'
+                                ? 'bg-blue-500 text-white rounded-br-none' // Sent message style
+                                : 'bg-gray-200 text-gray-800 rounded-bl-none' // Received message style
                             }`}
                           >
+                            {!message.isOwn && message.senderName && (<p className="text-xs font-semibold mb-1">{message.senderName}</p>)}
+
                             <p className="break-words">{message.content}</p>
                             <p className={`text-xs mt-1 ${
-                              message.isOwn ? 'text-primary-foreground/70' : 'text-muted-foreground'
+                              message.isOwn ? 'text-blue-200' : 'text-gray-600'
                             }`}>
-                              {message.timestamp.toLocaleTimeString()}
+                              {message.timestamp.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
                             </p>
                           </div>
                         </div>
@@ -303,4 +316,5 @@ function App() {
 }
 
 export default App
+
 
