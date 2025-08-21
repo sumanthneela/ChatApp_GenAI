@@ -23,13 +23,8 @@ A real-time 1-to-1 chat application built with FastAPI, PostgreSQL, and React. U
 
 ## Architecture Overview
 
-```
-┌─────────────────┐    WebSocket    ┌─────────────────┐    PostgreSQL    ┌─────────────────┐
-│                 │ ◄──────────────► │                 │ ◄───────────────► │                 │
-│   React Client  │                 │  FastAPI Server │                   │   PostgreSQL    │
-│                 │                 │                 │                   │                 │
-└─────────────────┘                 └─────────────────┘                   └─────────────────┘
-```
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/3059947b-4836-47c6-8dc8-7c1da221b8c1" />
+
 
 ### Key Components
 
