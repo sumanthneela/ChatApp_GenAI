@@ -205,14 +205,6 @@ real-time-chat-app/
 
 ## Deployment
 
-### Production Considerations
-
-1. **Environment Variables**: Configure database credentials and API URLs
-2. **HTTPS/WSS**: Use secure connections in production
-3. **Load Balancing**: Consider WebSocket sticky sessions
-4. **Database**: Use managed PostgreSQL service
-5. **Monitoring**: Add logging and health checks
-
 ### Environment Variables
 
 ```bash
