@@ -57,7 +57,6 @@ A real-time 1-to-1 chat application built with FastAPI, PostgreSQL, and React. U
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd real-time-chat-app
    ```
 
 2. Start all services:
