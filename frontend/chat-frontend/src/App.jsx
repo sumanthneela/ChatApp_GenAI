@@ -316,5 +316,3 @@ const currentUserIdRef = useRef('');
 }
 
 export default App
-
-
