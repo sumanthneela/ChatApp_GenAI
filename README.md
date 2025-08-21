@@ -44,7 +44,25 @@ A real-time 1-to-1 chat application built with FastAPI, PostgreSQL, and React. U
    - User presence tracking (online/offline status)
    - No message persistence (session-based only)
 
-## Quick Start
+## Project Structure
+
+```
+real-time-chat-app/
+├── backend/
+│   ├── main.py              # FastAPI application
+│   ├── requirements.txt     # Python dependencies
+│   └── Dockerfile          # Backend container
+├── frontend/
+│   └── chat-frontend/
+│       ├── src/
+│       │   ├── App.jsx     # Main React component
+│       │   ├── App.css     # Styles
+│       │   └── main.jsx    # Entry point
+│       ├── package.json    # Node.js dependencies
+│       └── Dockerfile      # Frontend container
+├── docker-compose.yml      # Multi-container setup
+└── README.md              # This file
+```
 
 ### Prerequisites
 
@@ -52,24 +70,7 @@ A real-time 1-to-1 chat application built with FastAPI, PostgreSQL, and React. U
 - Node.js 18+ (for local development)
 - Python 3.11+ (for local development)
 
-### Option 1: Docker Compose (Recommended)
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   ```
-
-2. Start all services:
-   ```bash
-   docker-compose up --build
-   ```
-
-3. Access the application:
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - API Documentation: http://localhost:8000/docs
-
-### Option 2: Local Development
+### Option 1: Local Development (Highly Recommended)
 
 #### Backend Setup
 
@@ -115,6 +116,24 @@ A real-time 1-to-1 chat application built with FastAPI, PostgreSQL, and React. U
    ```bash
    pnpm run dev --host
    ```
+   
+### Option 2: Docker Compose (It's Completely Optional)
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Start all services:
+   ```bash
+   docker-compose up --build
+   ```
+
+3. Access the application:
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+   - API Documentation: http://localhost:8000/docs
+
 
 ## Usage
 
@@ -171,40 +190,6 @@ A real-time 1-to-1 chat application built with FastAPI, PostgreSQL, and React. U
 }
 ```
 
-## Project Structure
-
-```
-real-time-chat-app/
-├── backend/
-│   ├── main.py              # FastAPI application
-│   ├── requirements.txt     # Python dependencies
-│   └── Dockerfile          # Backend container
-├── frontend/
-│   └── chat-frontend/
-│       ├── src/
-│       │   ├── App.jsx     # Main React component
-│       │   ├── App.css     # Styles
-│       │   └── main.jsx    # Entry point
-│       ├── package.json    # Node.js dependencies
-│       └── Dockerfile      # Frontend container
-├── docker-compose.yml      # Multi-container setup
-└── README.md              # This file
-```
-
-## Development Notes
-
-### Backend Features
-- **Connection Management**: Tracks WebSocket connections and user presence
-- **Error Handling**: Graceful handling of disconnections and errors
-- **Type Safety**: Uses Pydantic models for data validation
-- **CORS Support**: Configured for cross-origin requests
-
-### Frontend Features
-- **Real-time Updates**: Automatic user list and message updates
-- **Responsive Design**: Works on desktop and mobile devices
-- **Modern UI**: Built with shadcn/ui components and Tailwind CSS
-- **Connection Status**: Visual indicators for connection state
-
 ### Database Usage
 - PostgreSQL is used only for user presence tracking
 - No message history is stored (session-based communication)
@@ -245,28 +230,6 @@ VITE_API_URL=https://your-api-domain.com
 3. Make your changes
 4. Test thoroughly
 5. Submit a pull request
-
-## License
-
-This project is created as a take-home assignment and is available for educational purposes.
-
-## Troubleshooting
-
-### Common Issues
-
-1. **WebSocket Connection Failed**
-   - Check if backend is running on port 8000
-   - Verify CORS configuration
-   - Check browser console for errors
-
-2. **Users Not Appearing**
-   - Ensure PostgreSQL is running
-   - Check backend logs for database connection errors
-
-3. **Messages Not Sending**
-   - Verify WebSocket connection status
-   - Check network connectivity
-   - Review browser developer tools
 
 ### Logs
 
