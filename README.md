@@ -7,10 +7,7 @@ A real-time 1-to-1 chat application built with FastAPI, PostgreSQL, and React. U
 - **Real-time messaging** using WebSocket connections
 - **Online user presence** tracking and display
 - **1-to-1 chat sessions** between users
-- **Anonymous users** with auto-generated names/UUIDs
 - **Clean and responsive UI** built with React and Tailwind CSS
-- **Session-based communication** (no message persistence)
-- **Graceful disconnect handling**
 
 ## Tech Stack
 
